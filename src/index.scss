@@ -124,7 +124,9 @@ body{
     }
 
     &__img{
-        transition: 1s all;
+        max-width: 650px;
+        object-fit: cover;
+        
     }
 
 
