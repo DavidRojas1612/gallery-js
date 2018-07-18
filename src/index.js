@@ -1,5 +1,6 @@
 import { GalleryService } from './services/gallery.service'
 import { ModalService } from './class/modal.class'
+import { Gallery } from './class/gallery.class'
 import { AuthService } from './services/auth.service'
 import firebase from 'firebase/app'
 import {
@@ -23,6 +24,7 @@ firebase.initializeApp({
 })
 
 const auth = new AuthService()
+const gallery = new Gallery()
 
 const imageUp = () => {
   const inputImage = document.getElementById('fileUp')
@@ -60,4 +62,14 @@ const LogIn = () => {
     }
   })
 }
-LogIn()
+
+const render = () => {
+  console.log(auth.isAuth())
+  if (!auth.isAuth()) {
+    LogIn()
+  } else {
+    gallery.addImage()
+  }
+}
+
+render()
