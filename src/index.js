@@ -1,7 +1,6 @@
 import { GalleryService } from './services/gallery.service'
 import { ModalService } from './class/modal.class'
 import { AuthService } from './services/auth.service'
-import { Gallery } from './class/gallery.class'
 import firebase from 'firebase/app'
 import {
   APIKEY,
@@ -23,11 +22,9 @@ firebase.initializeApp({
   messagingSenderId: MESSAGSENDERID
 })
 
-const gallery = new Gallery()
 const auth = new AuthService()
 
 const imageUp = () => {
-  gallery.addImage()
   const inputImage = document.getElementById('fileUp')
   inputImage.addEventListener('change', e => {
     const fileImg = e.target.files[0]
@@ -50,14 +47,14 @@ const modalImage = galleryCont => {
 const LogIn = () => {
   const login = document.getElementById('Login')
   login.addEventListener('click', () => {
-    let isAut = auth.isAuth()
-    if (isAut) {
+    if (auth.isAuth()) {
       auth.logOut().then(() => {
-        window.localStorage.setItem('data', JSON.stringify([]))
-        gallery.render()
+        let appContent = document.getElementById('app')
+        document.body.removeChild(appContent)
       })
     } else {
       auth.login().then(() => {
+        auth.renderLogin()
         imageUp()
       })
     }

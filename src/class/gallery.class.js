@@ -3,10 +3,6 @@ import 'firebase/database'
 import firebase from 'firebase/app'
 
 export class Gallery {
-  constructor () {
-    this.render()
-  }
-
   addImage () {
     firebase.database().ref().once('value', snapshot => {
       let images = Object.values(snapshot.val().Images)
