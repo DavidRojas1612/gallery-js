@@ -63,13 +63,11 @@ const LogIn = () => {
   })
 }
 
-const render = () => {
+(function render () {
   console.log(auth.isAuth())
   if (!auth.isAuth()) {
     LogIn()
   } else {
     gallery.addImage()
   }
-}
-
-render()
+})()
